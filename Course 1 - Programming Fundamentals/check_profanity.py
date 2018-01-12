@@ -1,7 +1,7 @@
 import urllib
 
 def read_text():
-    quotes = open(r"D:\Udacity\FullStackDeveloper-UdacityNanodegree\Profanity Filter\movie_quotes.txt")
+    quotes = open(r""D:\Udacity\FullStackDeveloper-UdacityNanodegree\Course 1 - Programming Fundamentals\Profanity Filter\movie_quotes.txt"")
     contents_of_file = quotes.read()
     print(contents_of_file)
     quotes.close()
