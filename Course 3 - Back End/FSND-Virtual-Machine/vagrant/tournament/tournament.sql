@@ -1,9 +1,3 @@
--- Table definitions for the tournament project.
---
--- Put your SQL 'create table' statements in this file; also 'create view'
--- statements if you choose to use it.
---
--- You can write comments in this file by starting them with two dashes, like
--- these lines here.
-
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:10e9f11c87c9c5f1f49a62c2058752d98012d24dc9268fc1b6283f87e05fe1d5
+size 270
