@@ -1,32 +1,34 @@
+#!/usr/bin/env python
 import psycopg2
 
 DBNAME = "news"
 
 
 def get_top_articles():
+    """Return the list of the top 3 articles in descending order by views"""
     db = psycopg2.connect(database=DBNAME)
     c = db.cursor()
-    c.execute('''select articles.title, count(log.path) as views from articles,
-     log where log.path like '%' || articles.slug || '%'
-     group by articles.title order by views desc''')
+    c.execute('''select * from top_articles order by views desc limit 3''')
     articles = c.fetchall()
     db.close()
     return articles
 
 
 def get_top_authors():
+    """Return the list of the top 3 authors in descending order by views"""
     db = psycopg2.connect(database=DBNAME)
     c = db.cursor()
     c.execute('''select authors.name, sum(top_articles.views) as author_views
      from top_articles, authors, articles
      where top_articles.title = articles.title and authors.id = articles.author
-      group by authors.name order by author_views desc''')
+      group by authors.name order by author_views desc limit 3''')
     authors = c.fetchall()
     db.close()
     return authors
 
 
 def get_errored_days():
+    """Return the days where over 1% of the requests resulted in errors"""
     db = psycopg2.connect(database=DBNAME)
     c = db.cursor()
     c.execute('''select total_errors.error_date as date,

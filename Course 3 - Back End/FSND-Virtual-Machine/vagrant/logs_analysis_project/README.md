@@ -1,9 +1,14 @@
-#My Logs Analysis Project
+# My Logs Analysis Project
 
 A python web application that performs analyses on news article view data and
-error logs.
+error logs. To do this it uses a mock PostgreSQL database in python script to
+answer the following 3 questions:
+* What are the top 3 most viewed articles?
+* What are the top 3 most viewed authors?
+* What days did the error codes reach over 1% of the total daily requests for
+  the webpage?
 
-##Requirements
+## Requirements
 
 * Python 2.7.12
 * Flask 0.12.2
@@ -12,7 +17,7 @@ error logs.
 * FSND Virtual Machine configuration files. [Repository](https://github.com/udacity/fullstack-nanodegree-vm "Download VM configuration files")
 * The creation of the top_articles view
 
-##How to run the app
+## How to run the app
 
 Open the command prompt in the downloaded FSND Virtual Machine folder. In it
 type: `vagrant up` press enter, and then enter `vagrant ssh` and press enter.
@@ -30,11 +35,11 @@ To create the top articles view in the command prompt you must enter
 `psql news` to enter the psql command prompt for the news database. If
 you entered it correctly your command prompt will display `news=>`.
 
-In the psql command prompt in order to create the top_articles view enter the
+In the psql command prompt in order to create the top_articles view enter t
 following:
-```
+```sql
 create view top_articles as select articles.title, count(log.path) as views
-from articles, log where log.path like '%' || articles.slug || '%' group by
+from articles, log where log.path = '/article/' || articles.slug group by
 articles.title order by views desc;
 ```
 

@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from flask import Flask, request, redirect, url_for
 
 from logs_analysisdb import get_top_articles, get_top_authors, get_errored_days
