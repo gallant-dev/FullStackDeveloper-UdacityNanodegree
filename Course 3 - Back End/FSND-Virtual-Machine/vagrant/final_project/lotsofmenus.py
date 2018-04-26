@@ -21,7 +21,7 @@ session = DBSession()
 
 
 #Menu for UrbanBurger
-restaurant1 = Restaurant(name = "Urban Burger", description = "A gourmet burger expierience.")
+restaurant1 = Restaurant(name = "Urban Burger", description ="A gourmet burger expierience.")
 
 session.add(restaurant1)
 session.commit()

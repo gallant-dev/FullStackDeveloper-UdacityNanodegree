@@ -1,0 +1,35 @@
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles.css')}}">
+  <link href="https://fonts.googleapis.com/css?family=Hammersmith+One|Hind+Madurai" rel="stylesheet">
+</head>
+
+<body>
+
+<h1 class="actionhead">Edit Menu Item?</h1>
+
+<form action="{{url_for('editMenuItem', restaurant_id=restaurant_id, menu_id=i.id)}}" method="POST">
+
+  <p class="label">Name:</p>
+
+    <input class="textinput" type="text" size="30" name="name" placeholder="{{i.name}}">
+
+    <p class="label">Description:</p>
+
+      <input class="textinput" type="text" size="30" name="description" placeholder="{{i.description}}">
+
+    <p class="label">Price:</p>
+
+      <input class="textinput" type="text" size="8" name="price" placeholder="{{i.price}}">
+
+    <div class="formactioncontainer">
+          <input class="button formaction" type="submit" value="Confirm">
+          <a class="formaction" href="{{url_for('restaurantMenu', restaurant_id = i.restaurant_id)}}">Cancel</a>
+    </div>
+
+</form>
+
+</body>
+
+</html>

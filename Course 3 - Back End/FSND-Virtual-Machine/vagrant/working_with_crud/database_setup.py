@@ -18,6 +18,8 @@ class Restaurant(Base):
     String(80), nullable = False
     )
 
+    description = Column(String(250))
+
     id = Column(
     Integer, primary_key = True
     )

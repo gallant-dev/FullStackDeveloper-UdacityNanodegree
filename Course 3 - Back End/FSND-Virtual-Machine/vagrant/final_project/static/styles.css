@@ -1,0 +1,125 @@
+body {
+  width: 30%;
+  margin: 1em 35% 1em 35%;
+}
+
+h3 {
+  font-family: Georgia, serif;
+}
+
+content {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+a {
+  color: #15b915;
+  font-family: 'Hind Madurai', sans-serif;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+form {
+  width: 100%;
+}
+
+.actions {
+    width: 25%;
+    margin-left: 75%;
+}
+
+.actionhead {
+    font-family: 'Hammersmith One', sans-serif;
+    color: black;
+}
+
+.button {
+  background-color: #19e219;
+  color: white;
+  font-family: 'Hammersmith One', sans-serif;
+  border-radius: 2px;
+  width: 25%;
+}
+
+.cancel {
+  width: 49%;
+}
+
+.delete {
+  background-color: #19e219;
+  color: white;
+  font-family: 'Hammersmith One', sans-serif;
+  border-radius: 2px;
+  width: 25%;
+  margin: 0 12.5% 0 12.5%;
+}
+
+.description {
+  font-family: 'Hind Madurai', sans-serif;
+  color: grey;
+  font-style: italic;
+}
+
+.formactioncontainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.formaction{
+  min-width: 25%;
+  margin: 1em 12.6% 25% 1em;
+}
+
+.label {
+  color: #19e219;
+  font-family: 'Hammersmith One', sans-serif;
+  width: 35%;
+  margin-bottom: 0.25em;
+}
+
+.price {
+  font-family: 'Hind Madurai', sans-serif;
+  color: black;
+  font-style: oblique;
+  font-weight: bold;
+}
+
+.restaurant {
+  background-color: #19e219;
+  color: white;
+  font-family: 'Hammersmith One', sans-serif;
+  border-radius: 7px 7px 0 0;
+  margin-bottom: 0.25em;
+}
+
+.restaurantName {
+  color: black;
+    font-family: Georgia, serif;
+    font-weight: bold;
+    text-transform: capitalize;
+    font-size: 1.17em;
+}
+
+.textinput {
+  font-family: 'Hind Madurai', sans-serif;
+  color: black;
+  font-style: oblique;
+  font-weight: bold;
+  width: 71%;
+  margin: 0.25em;
+}
+
+.topmenu {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.topmenuitem {
+  min-width: 50%;
+}
