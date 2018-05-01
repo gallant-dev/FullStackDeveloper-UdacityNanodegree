@@ -38,7 +38,9 @@ def restaurantEdit(restaurant_id):
     editedRestaurant = session.query(Restaurant).filter_by(id = restaurant_id).one()
     if request.method == "POST":
         if request.form['name']:
-            editedItem.name = request.form['name']
+            editedRestaurant.name = request.form['name']
+        if request.form['description']:
+            editedRestaurant.description = request.form['description']
         session.add(editedRestaurant)
         session.commit()
         flash("Restaurant Edited!")
@@ -102,10 +104,26 @@ def deleteMenuItem(restaurant_id, menu_id):
     if request.method == 'POST':
         session.delete(deletedItem)
         session.commit()
-        flash("item deleted!")
+        flash("Item Deleted!")
         return redirect(url_for('restaurantMenu', restaurant_id = restaurant_id))
     else:
         return render_template('deletemenuitem.html', i = deletedItem)
+
+@app.route('/restaurants/JSON/')
+def restaurantsJSON():
+    restaurants = session.query(Restaurant).all()
+    return jsonify(Restaurant=[i.serialize for i in restaurants])
+
+@app.route('/restaurants/<int:restaurant_id>/menu/JSON/')
+def restaurantMenuJSON(restaurant_id):
+    restaurant = session.query(Restaurant).filter_by(id = restaurant_id).one()
+    items = session.query(MenuItem).filter_by(restaurant_id = restaurant_id)
+    return jsonify(MenuItems=[i.serialize for i in items])
+
+@app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_id>/JSON/')
+def menuItemJSON(restaurant_id, menu_id):
+    menuItem = session.query(MenuItem).filter_by(id = menu_id).one()
+    return jsonify(MenuItem = menuItem.serialize)
 
 if __name__ == '__main__':
     app.secret_key = 'super_secret_key'
