@@ -1,0 +1,142 @@
+a {
+  color: #15b915;
+  font-family: 'Hind Madurai', sans-serif;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+body {
+  width: 30%;
+  margin: 1em 35% 1em 35%;
+}
+
+content {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+form {
+  width: 100%;
+}
+
+h1 {
+    color: black;
+    font-family: Georgia, serif;
+    font-weight: bold;
+    text-transform: capitalize;
+    font-size: 1.17em;
+}
+
+h3 {
+  font-family: Georgia, serif;
+}
+
+p {
+  font-family: serif;
+}
+
+.actions {
+    width: 25%;
+    margin-left: 75%;
+}
+
+.actionhead {
+    font-family: 'Hammersmith One', sans-serif;
+    color: black;
+}
+
+.arrangement {
+  background-color: #19e219;
+  color: white;
+  font-family: 'Hammersmith One', sans-serif;
+  border-radius: 7px 7px 0 0;
+  margin-bottom: 0.25em;
+  padding-left: 0.5em;
+}
+
+.arrangementName {
+  color: black;
+    font-family: Georgia, serif;
+    font-weight: bold;
+    text-transform: capitalize;
+    font-size: 1.17em;
+}
+
+.button {
+  background-color: #19e219;
+  color: white;
+  font-family: 'Hammersmith One', sans-serif;
+  border-radius: 2px;
+  width: 25%;
+}
+
+.cancel {
+  width: 49%;
+}
+
+.card {
+  margin: 1em 0 1em 0;
+}
+
+.delete {
+  background-color: #19e219;
+  color: white;
+  font-family: 'Hammersmith One', sans-serif;
+  border-radius: 2px;
+  width: 25%;
+  margin: 0 12.5% 0 12.5%;
+}
+
+.description {
+  font-family: 'Hind Madurai', sans-serif;
+  color: grey;
+  font-style: italic;
+}
+
+.formactioncontainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.formaction{
+  min-width: 25%;
+  margin: 1em 12.6% 25% 1em;
+}
+
+.label {
+  color: #19e219;
+  font-family: 'Hammersmith One', sans-serif;
+  width: 35%;
+  margin-bottom: 0.1em;
+}
+
+.price {
+  font-family: 'Hind Madurai', sans-serif;
+  color: black;
+  font-style: oblique;
+  font-weight: bold;
+}
+
+.textinput {
+  font-family: 'Hind Madurai', sans-serif;
+  color: black;
+  font-style: oblique;
+  font-weight: bold;
+  width: 71%;
+  margin: 0.25em;
+}
+
+.topmenu {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.topmenuitem {
+  min-width: 50%;
+}

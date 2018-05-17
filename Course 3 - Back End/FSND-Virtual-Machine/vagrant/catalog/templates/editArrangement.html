@@ -1,0 +1,37 @@
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles.css')}}">
+  <link href="https://fonts.googleapis.com/css?family=Hammersmith+One|Hind+Madurai" rel="stylesheet">
+</head>
+
+<body>
+
+<h1 class="actionhead">Edit "{{arrangement.name}}"?</h1>
+
+<a class="editflowers" href="{{url_for('showArrangement', arrangement_id = arrangement.id)}}">Edit Flowers</a>
+
+<form action="{{url_for('editArrangement', arrangement_id=arrangement.id)}}" method="POST">
+
+  <p class="label">Name:</p>
+
+    <input class="textinput" type="text" size="30" name="name" placeholder="{{arrangement.name}}">
+
+  <p class="label">Description:</p>
+
+    <input class="textinput" type="text" size="30" name="description" placeholder="{{arrangement.description}}">
+
+  <p class="label">Price:</p>
+
+    <input class="textinput" type="text" size="30" name="base_price" placeholder="{{arrangement.base_price}}">
+
+    <div class="formactions">
+      <input class="button formaction" type="button" value="Confirm">
+      <a class="cancel formaction" href="{{url_for('showCatalog')}}">Cancel</a>
+    </div>
+
+</form>
+
+</body>
+
+</html>
