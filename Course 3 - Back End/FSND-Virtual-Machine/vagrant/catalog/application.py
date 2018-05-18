@@ -1,4 +1,8 @@
 #!/usr/bin/env python
+"""
+A web app for making arrangement types and adding flowers. Provides users
+authentication using Google OAuth2.0
+"""
 
 from flask import (Flask, render_template, request, redirect, jsonify, url_for,
                    flash)
@@ -30,6 +34,7 @@ app = Flask(__name__)
 
 @app.route('/login')
 def showLogin():
+    """Routing for desplaying the login page."""
     state = ''.join(random.choice(string.ascii_uppercase + string.digits)
                     for x in xrange(32))
     login_session['state'] = state
@@ -38,6 +43,7 @@ def showLogin():
 
 @app.route('/gconnect', methods=['POST'])
 def gconnect():
+    """Routing for Google OAuth2.0."""
     if request.args.get('state') != login_session['state']:
         response = make_response(json.dumps('Invalid state parameter.'), 401)
         response.headers['Content-Type'] = 'application/json'
@@ -74,7 +80,6 @@ def gconnect():
     if result['issued_to'] != CLIENT_ID:
         response = make_response(
             json.dumps("Token's client ID does not match app's."), 401)
-        print "Token's client ID does not match app's."
         response.headers['Content-Type'] = 'application/json'
         return response
 
@@ -114,7 +119,6 @@ def gconnect():
     output += ''' " style = "width: 300px; height: 300px;border-radius: 150px;
     -webkit-border-radius: 150px;-moz-border-radius: 150px;"> '''
     flash("you are now logged in as %s" % login_session['username'])
-    print "done!"
     return output
 
 
@@ -142,7 +146,7 @@ def getUserID(email):
 
 @app.route('/gdisconnect')
 def gdisconnect():
-    # Only disconnect a connected user.
+    """Routing for Google OAuth2.0 logout."""
     access_token = login_session.get('access_token')
     if access_token is None:
         response = make_response(
@@ -165,6 +169,7 @@ def gdisconnect():
 
 @app.route('/disconnect')
 def disconnect():
+    """Routing to remove login_session information on logout."""
     if 'provider' in login_session:
         if login_session['provider'] == 'google':
             gdisconnect()
@@ -185,6 +190,7 @@ def disconnect():
 @app.route('/')
 @app.route('/arrangements', methods=['GET'])
 def showCatalog():
+    """Routing to display arrangements if there are any."""
     arrangements = session.query(Arrangement).all()
     if 'username' not in login_session:
         return render_template('publicArrangements.html',
@@ -194,6 +200,7 @@ def showCatalog():
 
 @app.route('/arrangements/new', methods=['GET', 'POST'])
 def createArrangement():
+    """Routing to create a new arrangement."""
     if 'username' not in login_session:
         return redirect('/login')
     if request.method == 'POST':
@@ -211,6 +218,7 @@ def createArrangement():
 
 @app.route('/arrangements/<int:arrangement_id>/edit', methods=['GET', 'POST'])
 def editArrangement(arrangement_id):
+    """Routing to edit an existing arrangment."""
     if 'username' not in login_session:
         return redirect('/login')
     editedArrangement = session.query(
@@ -238,6 +246,7 @@ def editArrangement(arrangement_id):
 @app.route('/arrangements/<int:arrangement_id>/delete',
            methods=['GET', 'POST'])
 def deleteArrangement(arrangement_id):
+    """Routing to delete an arrangement."""
     if 'username' not in login_session:
         return redirect('/login')
     arrangementToDelete = session.query(
@@ -258,6 +267,7 @@ def deleteArrangement(arrangement_id):
 
 @app.route('/arrangements/<int:arrangement_id>', methods=['GET'])
 def showArrangement(arrangement_id):
+    """Routing to show the contents of an individual arrangment."""
     arrangement = session.query(Arrangement).filter_by(id=arrangement_id).one()
     creator = getUserInfo(arrangement.user_id)
     flowers = session.query(Flower).filter_by(
@@ -273,6 +283,7 @@ def showArrangement(arrangement_id):
 
 @app.route('/arrangements/<int:arrangement_id>/new', methods=['GET', 'POST'])
 def addFlower(arrangement_id):
+    """Routing to add a flower to an existing arrangment."""
     if 'username' not in login_session:
         return redirect('/login')
     arrangement = session.query(Arrangement).filter_by(id=arrangement_id).one()
@@ -299,6 +310,7 @@ def addFlower(arrangement_id):
 @app.route('/arrangements/<int:arrangement_id>/<int:flower_id>',
            methods=['GET', 'POST'])
 def editFlower(arrangement_id, flower_id):
+    """Routing to edit an existing flower."""
     if 'username' not in login_session:
         return redirect('/login')
     editedFlower = session.query(Flower).filter_by(id=flower_id).one()
@@ -328,6 +340,7 @@ def editFlower(arrangement_id, flower_id):
 @app.route('/arrangements/<int:arrangement_id>/<int:flower_id>/delete',
            methods=['GET', 'POST'])
 def deleteFlower(arrangement_id, flower_id):
+    """Routing to delete a flower."""
     if 'username' not in login_session:
         return redirect('/login')
     arrangement = session.query(Arrangement).filter_by(id=arrangement_id).one()
@@ -349,6 +362,7 @@ def deleteFlower(arrangement_id, flower_id):
 
 @app.route('/users/JSON/')
 def userJSON():
+    """Routing to display a list of registered users in JSON format."""
     try:
         users = session.query(User).all()
         return jsonify(User=[i.serialize for i in users])
@@ -358,6 +372,7 @@ def userJSON():
 
 @app.route('/arrangements/JSON/')
 def arrangementsJSON():
+    """Routing to display a list of arrangments in JSON format."""
     try:
         arrangements = session.query(Arrangement).all()
         return jsonify(Arrangment=[i.serialize for i in arrangements])
@@ -367,6 +382,7 @@ def arrangementsJSON():
 
 @app.route('/arrangements/<int:arrangement_id>/JSON/')
 def arrangmentFlowersJSON(arrangement_id):
+    """Routing to display the flower content of a specific arrangment."""
     try:
         flowers = session.query(Flower).filter_by(
                                     arrangement_id=arrangement_id).all()
@@ -377,6 +393,7 @@ def arrangmentFlowersJSON(arrangement_id):
 
 @app.route('/arrangements/<int:arrangement_id>/<int:flower_id>/JSON/')
 def flowerJSON(arrangement_id, flower_id):
+    """Routing to display data for a specific flower in JSON format."""
     try:
         flower = session.query(Flower).filter_by(id=flower_id).one()
         return jsonify(Flower=flower.serialize)
