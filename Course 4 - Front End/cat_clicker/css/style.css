@@ -5,6 +5,36 @@ body {
   flex-wrap: wrap;
 }
 
+content {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+label {
+  margin-left: 1em;
+  font-family: sans-serif;
+}
+
+input {
+  border-radius: 1px;
+  width: 20%;
+}
+
+#admin-section {
+  width: 65%;
+  height: 15%;
+  padding-left: 25%;
+}
+
+#admin-button {
+  width: 15%;
+  height: 50%;
+  color: white;
+  font-family: sans-serif;
+  font-weight: bold;
+  background-color: orange;
+}
+
 #cat-image {
   width: 100%;
 }
