@@ -1,0 +1,59 @@
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles.css')}}">
+  <link href="https://fonts.googleapis.com/css?family=Hammersmith+One|Hind+Madurai" rel="stylesheet">
+</head>
+
+{% include "publicheader.html" %}
+
+<body>
+
+  <h1 class = "arrangement">Types of Arrangements</h1>
+
+  <div class="topmenu">
+    <a class="topmenuitem" href='{{url_for('showCatalog')}}'>Refresh</a>
+    <a class="topmenuitem" href='{{url_for('createArrangement')}}'>Add New</a>
+  </div>
+
+  {% with messages = get_flashed_messages() %}
+
+  {% if messages %}
+
+  <ul>
+
+  {% for message in messages %}
+
+  <li class="actionhead"><strong>{{message}}</strong></li>
+
+  {% endfor %}
+
+  </ul>
+
+  {% endif %}
+
+  {% endwith %}
+
+  {% for arrangement in arrangements %}
+
+  <div class="card">
+
+    <a class="arrangementLink" href="{{url_for('showArrangement', arrangement_id = arrangement.id)}}" >
+
+      <p class="arrangementName">{{arrangement.name}}</p>
+
+      <p class="description">{{arrangement.description}}</p>
+
+      <p class="price">{{arrangement.base_price}}</p>
+
+    </a>
+
+    </br></br>
+
+  </div>
+
+
+{% endfor %}
+</body>
+
+</html>
